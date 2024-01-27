@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\MenuRequest;
+use App\Models\Category;
+use App\Models\Menu;
+use App\Models\Shop;
+use App\Service\MenuService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Ramsey\Uuid\Uuid;
+
+class MenuController extends Controller
+{
+
+    private MenuService $menuService;
+
+    /**
+     * @param MenuService $menuService
+     */
+    public function __construct(MenuService $menuService)
+    {
+        $this->menuService = $menuService;
+    }
+
+    public function menu(string $shopName): Response
+    {
+        $shop = Shop::query()->where('name', '=', $shopName)->first();
+        $menus = Menu::query()
+            ->join('categories', 'menus.category_id', '=', 'categories.id')
+            ->join('shops', 'menus.shop_id', '=', 'shops.id')
+            ->orderBy('categories.categoryName')
+            ->select(
+                'menus.id',
+                'menus.menuName',
+                'menus.category_id',
+                'categories.categoryName',
+                'menus.price',
+                'menus.desc',
+                'menus.img',
+                'shops.name'
+            )->where('name', '=', ucwords($shopName))
+            ->get();
+
+//        $result = Shop::query()->where('shops.name', '=', ucwords($shopName))
+//            ->fromQuery($menus);
+
+        return response()
+            ->view('features.menu', [
+                "title" => "Menu | $shop->name",
+                "shop" => $shop,
+                'menus' => $menus
+            ]);
+    }
+
+    public function menuAdd()
+    {
+        $categories = Category::all();
+        $shops = Shop::all();
+
+        return response()
+            ->view('features.menuAdd', [
+                'Menu Add | U-Canteen',
+                'categories' => $categories,
+                'shops' => $shops
+            ]);
+    }
+
+    public function menuAddPost(MenuRequest $request): RedirectResponse
+    {
+        try {
+
+            $validate = $request->validated();
+
+            //auto add ID
+            $validate['id'] = Uuid::uuid4()->toString();
+
+            //get real name file
+            $file = $request->file('img');
+            $validate['img'] = $file->getClientOriginalName();
+
+            $file->store('/img/shops/menus', 'public');
+
+            $this->menuService->save($validate);
+            return redirect('/menu-add')
+                ->with('success', 'Data menu berhasil di tambahkan');
+
+        } catch (ValidationException $exception) {
+            return redirect('/menu-add');
+        }
+    }
+}
