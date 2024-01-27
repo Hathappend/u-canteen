@@ -49,9 +49,7 @@ Route::controller(\App\Http\Controllers\ShopController::class)->group(function (
 });
 
 Route::get('/migration', function (){
-    Route::get('/foo', function () {
-        Artisan::call('migrate');
-    });
+    Artisan::call('migrate');
 });
 
 
