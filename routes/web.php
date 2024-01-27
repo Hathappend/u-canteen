@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,12 @@ Route::controller(\App\Http\Controllers\ShopController::class)->group(function (
         Route::get('/shop-add', 'shopAdd');
         Route::post('/shop-add', 'shopAddPost');
         Route::post('/{shopName}/menu', 'shop');
+    });
+});
+
+Route::get('/migration', function (){
+    Route::get('/foo', function () {
+        Artisan::call('migrate');
     });
 });
 
