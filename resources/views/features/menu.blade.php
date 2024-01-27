@@ -23,7 +23,7 @@
                     <div class="card mb-3 mt-5" style="max-width: 540px;">
                         <div class="row g-0">
                             <div class="col-md-4" style="background: #D9D9D9;">
-                                <img src="/assets/img/icon-toko.png" class="img-fluid rounded-start" alt="...">
+                                <img src="/assets/img/{{ $menu->img }}" class="img-fluid rounded-start" alt="...">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
