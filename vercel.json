@@ -5,8 +5,16 @@
     },
     "routes": [
         {
-            "src": "/assets/(.*)",
-            "dest": "/public/assets/"
+            "src": "/assets/img(.*)",
+            "dest": "/public/assets/img"
+        },
+        {
+            "src": "/assets/css(.*)",
+            "dest": "/public/assets/css"
+        },
+        {
+            "src": "/assets/fontawesome/css/(.*)",
+            "dest": "/public/assets/fontawesome/css/"
         },
         {
             "src": "/(.*)",
