@@ -197,6 +197,7 @@ return [
         App\Providers\UserServiceProvider::class,
         App\Providers\ShopServiceProvider::class,
         App\Providers\MenuServiceProvider::class,
+        App\Providers\CartServiceProvider::class,
 
     ],
 
