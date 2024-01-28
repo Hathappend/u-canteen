@@ -38,7 +38,10 @@ class UserController extends Controller
             $result = $this->userService->login($validate['username'], $validate['password']);
             if ($result) {
                 $find = User::query()->where('username', '=', $validate['username'])->first();
-                $request->session()->put('user', "$find->first_name $find->last_name");
+                $request->session()->put('user', [
+                    'name' => "$find->first_name $find->last_name",
+                    'username' => $find->username
+                ]);
                 return redirect('/');
             }else{
                 return redirect('/login')
