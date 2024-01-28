@@ -19,13 +19,13 @@ class UserServiceTest extends TestCase
         parent::setUp();
 
         $this->userService = $this->app->make(UserService::class);
-        DB::delete('delete from users');
+//        DB::delete('delete from users');
     }
 
     public function testLoginSuccess()
     {
         $this->seed(UserSeeder::class);
-        $result = $this->userService->login('asep', 'rahasia');
+        $result = $this->userService->login('10122027', 'rahasia');
 
         self::assertTrue($result);
     }

@@ -17,11 +17,11 @@ class UserSeeder extends Seeder
     {
         $user = new User();
         $user->id = Uuid::uuid4()->toString();
-        $user->first_name = 'Asep';
-        $user->last_name = 'Suryaman';
-        $user->username = 'asep';
+        $user->first_name = 'Bambang Firman';
+        $user->last_name = 'Fatoni';
+        $user->username = '10122027';
         $user->password = Hash::make('rahasia');
-        $user->email = 'asep.10122004@mahasiswa.unikom.ac.id';
+        $user->email = 'bambang.10122027@mahasiswa.unikom.ac.id';
         $user->save();
     }
 }
