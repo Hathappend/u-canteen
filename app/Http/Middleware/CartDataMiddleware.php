@@ -19,12 +19,14 @@ class CartDataMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $findUser = User::query()->where('username', '=', Session::get('username'))->first();
-        $getCarts = Cart::query()->where('user_id', '=', $findUser->id)->get();
+        if (!empty($findUser)) {
+            $getCarts = Cart::query()->where('user_id', '=', $findUser->id)->get();
 
-        $qtyTotal = $getCarts->count();
+            $qtyTotal = $getCarts->count();
 
-        view()->share('qtyTotal', $qtyTotal);
+            view()->share('qtyTotal', $qtyTotal);
 
+        }
         return $next($request);
     }
 }
