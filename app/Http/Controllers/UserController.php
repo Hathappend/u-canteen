@@ -38,7 +38,7 @@ class UserController extends Controller
             $result = $this->userService->login($validate['username'], $validate['password']);
             if ($result) {
                 $find = User::query()->where('username', '=', $validate['username'])->first();
-                $request->session()->put('user', [
+                $request->session()->put([
                     'name' => "$find->first_name $find->last_name",
                     'username' => $find->username
                 ]);
