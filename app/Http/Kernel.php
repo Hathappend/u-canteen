@@ -3,7 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CartDataMiddleware;
-use App\Http\Middleware\openOrCloseNotificationMiddleware;
+use App\Http\Middleware\OpenOrCloseNotificationMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             CartDataMiddleware::class,
-            openOrCloseNotificationMiddleware::class,
+            OpenOrCloseNotificationMiddleware::class,
         ],
 
         'api' => [
