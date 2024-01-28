@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Menu extends Model
 {
@@ -33,5 +34,12 @@ class Menu extends Model
     {
         return $this->belongsTo(Shop::class, 'shop_id', 'id');
     }
+
+    public function carts(): BelongsToMany
+    {
+        return $this->belongsToMany(Cart::class, 'menus_carts','menu_id', 'cart_id');
+    }
+
+
 
 }
