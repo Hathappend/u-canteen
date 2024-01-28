@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -198,6 +198,7 @@ return [
         App\Providers\ShopServiceProvider::class,
         App\Providers\MenuServiceProvider::class,
         App\Providers\CartServiceProvider::class,
+        App\Providers\CheckoutServiceProvider::class,
 
     ],
 

@@ -15,7 +15,7 @@ class MustLoginFirst
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->session()->exists('user')) {
+        if ($request->session()->exists('name')) {
             return $next($request);
         }else{
             return redirect('/login');

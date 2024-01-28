@@ -16,6 +16,7 @@ class Category extends Model
 
     protected $fillable = [
         'categoryName',
+        'desc'
     ];
 
     public function menus(): HasMany

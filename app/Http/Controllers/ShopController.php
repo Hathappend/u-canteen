@@ -12,12 +12,6 @@ use Ramsey\Uuid\Uuid;
 
 class ShopController extends Controller
 {
-
-    public function shop(string $shopName): RedirectResponse
-    {
-        return redirect()->action([MenuController::class, 'menu'],$shopName);
-    }
-
     public function shopAdd():Response
     {
         return response()
@@ -31,12 +25,13 @@ class ShopController extends Controller
         try {
             $validate = $request->validated();
 
-            $image = $validate['img'];
-            $move = $image->store('/img/shops/featured', 'public');
+            $file = $request->file('img');
+            $validate['img'] = time() .'_'. $file->getClientOriginalName();
+            $file->storeAs('/img/shops/featured', time() .'_'. $file->getClientOriginalName() , 'public');
             Shop::query()->create([
                 'id' => Uuid::uuid4()->toString(),
                 'name' => $validate['name'],
-                'img' => $move
+                'img' => $validate['img']
             ]);
 
             return redirect('/shop-add')

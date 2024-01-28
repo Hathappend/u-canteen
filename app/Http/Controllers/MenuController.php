@@ -10,6 +10,7 @@ use App\Service\MenuService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Ramsey\Uuid\Uuid;
 
@@ -28,7 +29,7 @@ class MenuController extends Controller
 
     public function menu(string $shopName): Response
     {
-        $shop = Shop::query()->where('name', '=', $shopName)->first();
+        $shop = Shop::query()->where('name', '=',ucwords(Str::slug($shopName,' ')))->first();
         $menus = Menu::query()
             ->join('categories', 'menus.category_id', '=', 'categories.id')
             ->join('shops', 'menus.shop_id', '=', 'shops.id')
@@ -38,11 +39,12 @@ class MenuController extends Controller
                 'menus.menuName',
                 'menus.category_id',
                 'categories.categoryName',
+                'categories.desc as category_desc',
                 'menus.price',
-                'menus.desc',
+                'menus.desc as menu_desc',
                 'menus.img',
                 'shops.name'
-            )->where('name', '=', ucwords($shopName))
+            )->where('name', '=', ucwords(Str::slug($shopName,' ')))
             ->get();
 
 //        $result = Shop::query()->where('shops.name', '=', ucwords($shopName))
@@ -56,7 +58,7 @@ class MenuController extends Controller
             ]);
     }
 
-    public function menuAdd()
+    public function menuAdd(): Response
     {
         $categories = Category::all();
         $shops = Shop::all();
@@ -80,9 +82,9 @@ class MenuController extends Controller
 
             //get real name file
             $file = $request->file('img');
-            $validate['img'] = $file->getClientOriginalName();
+            $validate['img'] = time() .'_'. $file->getClientOriginalName();
 
-            $file->store('/img/shops/menus', 'public');
+            $file->storeAs('/img/shops/menus', $validate['img'] , 'public');
 
             $this->menuService->save($validate);
             return redirect('/menu-add')

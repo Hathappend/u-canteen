@@ -8,7 +8,7 @@
                     <a class="me-1" aria-current="page" href="/checkout">
                         <i class="fa-solid fa-cart-shopping fa-lg" style="color: #f2f2f2;"></i>
                     </a>
-                    <span class="count-cart bg-primary">1</span>
+                    <span class="count-cart bg-primary">{{ $qtyTotal }}</span>
                 </div>
                 <div class="col">
                     <form action="/logout" method="post">
@@ -18,8 +18,17 @@
                         </button>
                     </form>
                 </div>
-
             </div>
-
     </div>
 </nav>
+<div class="alert alert-warning alert-dismissible fade show position-absolute w-100 after-navbar text-center" role="alert" style="margin-top: -3rem">
+    @if($open ?? false)
+        <strong>{{ $open }}</strong>
+        <u>{{ session()->get('name') }}</u>, Waktunya mencari menu yang kamu mau.
+    @endif
+    @if($close ?? false)
+        <strong>{{ $close }}</strong>
+        <u>{{ session()->get('name') }}</u>, Terimakasih sudah berkunjung. Kami akan kembali pada pukul <strong>07:00</strong>
+    @endif
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

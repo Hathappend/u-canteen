@@ -37,7 +37,8 @@ class Menu extends Model
 
     public function carts(): BelongsToMany
     {
-        return $this->belongsToMany(Cart::class, 'menus_carts','menu_id', 'cart_id');
+        return $this->belongsToMany(Cart::class, 'menus_carts','menu_id', 'cart_id')
+            ->withPivot('menu_id', 'cart_id');
     }
 
 

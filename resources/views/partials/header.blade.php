@@ -17,6 +17,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
 
+    <!-- Sweat Allert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title>{{$title ?? ''}}</title>
 </head>
 <body>

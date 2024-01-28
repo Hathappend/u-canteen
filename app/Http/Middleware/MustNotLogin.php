@@ -15,7 +15,7 @@ class MustNotLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->session()->exists('user')) {
+        if ($request->session()->exists('name')) {
             return redirect('/');
         }else{
             return $next($request);

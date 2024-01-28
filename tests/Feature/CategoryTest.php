@@ -14,8 +14,9 @@ class CategoryTest extends TestCase
     {
         $category = new Category();
         $category->id = Uuid::uuid4()->toString();
-        $category->categoryName = 'Cemilan';
+        $category->categoryName = 'Ujang';
         $category->created_at = now();
+        $category->desc = 'Kategori makanan "Aneka Nasi" menyajikan variasi nasi lezat dengan beragam pilihan hidangan';
         $category->save();
 
         $result = Category::query()->where('categoryName', '=', 'Aneka Nasi')->first();

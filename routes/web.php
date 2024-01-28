@@ -26,18 +26,27 @@ Route::controller(\App\Http\Controllers\UserController::class)->group(function (
 
 Route::controller(\App\Http\Controllers\MenuController::class)->group(function (){
     Route::middleware(\App\Http\Middleware\MustLoginFirst::class)->group(function (){
-        Route::get('/{shopName}/menu', 'menu');
+        Route::get('/{shopName}/menu', 'menu')->name('showMenu');
         Route::get('/menu-add', 'menuAdd');
         Route::post('/menu-add', 'menuAddPost');
     });
 });
 
-Route::post('/logout', function (){
-    return redirect('/login');
+Route::controller(\App\Http\Controllers\CartController::class)->group(function (){
+    Route::middleware(\App\Http\Middleware\MustLoginFirst::class)->group(function (){
+        Route::post('/{menuName}/{menuId}', 'addCart');
+        Route::post('/cart/delete/{menuName}/{menuId}', 'deletePerCartItem');
+    });
 });
 
-Route::get('/checkout', function (){
-    return view('features.checkout');
+Route::controller(\App\Http\Controllers\CheckoutController::class)->group(function (){
+    Route::middleware(\App\Http\Middleware\MustLoginFirst::class)->group(function (){
+        Route::get('/checkout', 'checkout')->name('checkout');
+    });
+});
+
+Route::post('/logout', function (){
+    return redirect('/login');
 });
 
 Route::controller(\App\Http\Controllers\ShopController::class)->group(function (){

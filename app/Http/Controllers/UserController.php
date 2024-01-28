@@ -39,7 +39,7 @@ class UserController extends Controller
             if ($result) {
                 $find = User::query()->where('username', '=', $validate['username'])->first();
                 $request->session()->put([
-                    'name' => "$find->first_name $find->last_name",
+                    'name' => $find->first_name . $find->last_name,
                     'username' => $find->username
                 ]);
                 return redirect('/');
