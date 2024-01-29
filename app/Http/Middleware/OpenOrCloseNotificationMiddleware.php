@@ -16,14 +16,16 @@ class OpenOrCloseNotificationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $currentTime = Carbon::now()->hour();
-        if ($currentTime->hour < 3) {
+        $currentTime = Carbon::now()->hour;
+        if ($currentTime < 3) {
             view()->share('close', 'Selamat Malam');
-        } elseif ($currentTime->hour < 10) {
+        } elseif ($currentTime < 7) {
             view()->share('close', 'Selamat Pagi');
-        } elseif ($currentTime->hour < 13) {
+        } elseif ($currentTime < 10) {
+            view()->share('open', 'Selamat Pagi');
+        }elseif ($currentTime < 13) {
             view()->share('open', 'Selamat Siang');
-        } elseif ($currentTime->hour < 16){
+        } elseif ($currentTime < 16){
             view()->share('open', 'Selamat Sore');
         }
 
