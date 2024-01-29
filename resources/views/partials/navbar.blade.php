@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#"><img src="/assets/img/brand.png"></a>
+        <a class="navbar-brand" href="/"><img src="/assets/img/brand.png"></a>
 
 
             <div class="row justify-content-end">
