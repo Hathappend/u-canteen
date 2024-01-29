@@ -24,7 +24,7 @@
                         <blockquote class="blockquote">
                             <p>{{ $menu->categoryName}}</p>
                         </blockquote>
-                        <figcaption class="blockquote-footer" style="width: 50%">
+                        <figcaption class="blockquote-footer">
                             {{ $menu->category_desc }}
                         </figcaption>
                     </figure>
