@@ -28,5 +28,15 @@ class UserControllerTest extends TestCase
             ->assertSessionHas('error', 'Username atau password salah!');
     }
 
+    public function testLogout()
+    {
+        $this->withSession([
+            'name' => 'asep yaman suryaman',
+            'username' => 'ujang'
+        ])->post('/logout')
+            ->assertSessionMissing(['name', 'username'])
+            ->assertRedirect('/login');
+    }
+
 
 }

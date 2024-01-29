@@ -52,4 +52,10 @@ class UserController extends Controller
                 ->with('validate', $exception->errors());
         }
     }
+
+    public function postLogout(): RedirectResponse
+    {
+        $this->userService->logout();
+        return redirect('/login');
+    }
 }

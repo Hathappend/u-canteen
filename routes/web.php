@@ -22,7 +22,11 @@ Route::controller(\App\Http\Controllers\UserController::class)->group(function (
         Route::get('/login', 'login');
         Route::post('/login', 'postLogin');
     });
+
+    Route::post('/logout', 'postLogout')
+        ->middleware(\App\Http\Middleware\MustLoginFirst::class);
 });
+
 
 Route::controller(\App\Http\Controllers\MenuController::class)->group(function (){
     Route::middleware(\App\Http\Middleware\MustLoginFirst::class)->group(function (){
@@ -43,10 +47,6 @@ Route::controller(\App\Http\Controllers\CheckoutController::class)->group(functi
     Route::middleware(\App\Http\Middleware\MustLoginFirst::class)->group(function (){
         Route::get('/checkout', 'checkout')->name('checkout');
     });
-});
-
-Route::post('/logout', function (){
-    return redirect('/login');
 });
 
 Route::controller(\App\Http\Controllers\ShopController::class)->group(function (){

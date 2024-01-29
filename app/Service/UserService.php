@@ -12,4 +12,6 @@ interface UserService
 
     public function forgotPassword(string $email): bool;
 
+    public function logout(): void;
+
 }

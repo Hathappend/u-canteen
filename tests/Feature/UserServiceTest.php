@@ -8,6 +8,7 @@ use Database\Seeders\UserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class UserServiceTest extends TestCase
@@ -37,5 +38,22 @@ class UserServiceTest extends TestCase
 
         self::assertFalse($result);
     }
+
+    public function testLogout()
+    {
+        Session::put([
+            'name' => 'asep yaman suryaman',
+            'username' => 'ujang'
+        ]);
+
+        self::assertEquals('asep yaman suryaman', Session::get('name'));
+        self::assertEquals('ujang', Session::get('username'));
+
+        $this->userService->logout();
+
+        self::assertNull(Session::get('name'));
+        self::assertNull(Session::get('username'));
+    }
+
 
 }

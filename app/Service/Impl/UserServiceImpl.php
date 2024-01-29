@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Service\UserService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserServiceImpl implements UserService
 {
@@ -21,5 +22,11 @@ class UserServiceImpl implements UserService
     {
         // TODO: Implement forgotPassword() method.
     }
+
+    public function logout(): void
+    {
+        Session::forget(['name', 'username']);
+    }
+
 
 }
