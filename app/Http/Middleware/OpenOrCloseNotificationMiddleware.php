@@ -27,6 +27,10 @@ class OpenOrCloseNotificationMiddleware
             view()->share('open', 'Selamat Siang');
         } elseif ($currentTime < 16){
             view()->share('open', 'Selamat Sore');
+        }elseif ($currentTime < 18){
+            view()->share('close', 'Selamat Sore');
+        }else{
+            view()->share('close', 'Selamat Malam');
         }
 
         return $next($request);
