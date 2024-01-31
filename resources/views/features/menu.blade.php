@@ -39,7 +39,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $menu->menuName }}</h5>
                                     <hr>
-                                    <h5 class="card-title">Rp. {{ $menu->price }},-</h5>
+                                    <h5 class="card-title">Rp. {{ number_format($menu->price) }},-</h5>
                                     <p class="card-desc pt-2">{{ $menu->menu_desc }}</p>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
