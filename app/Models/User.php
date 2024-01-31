@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Cart::class, 'user_id', 'id');
     }
+
+    public function checkout(): HasOne
+    {
+        return $this->hasOne(Checkout::class, 'user_id', 'id');
+    }
 }

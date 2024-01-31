@@ -46,6 +46,7 @@ Route::controller(\App\Http\Controllers\CartController::class)->group(function (
 Route::controller(\App\Http\Controllers\CheckoutController::class)->group(function (){
     Route::middleware(\App\Http\Middleware\MustLoginFirst::class)->group(function (){
         Route::get('/checkout', 'checkout')->name('checkout');
+        Route::post('/checkout', 'process');
     });
 });
 
