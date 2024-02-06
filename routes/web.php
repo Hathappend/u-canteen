@@ -47,6 +47,7 @@ Route::controller(\App\Http\Controllers\CheckoutController::class)->group(functi
     Route::middleware(\App\Http\Middleware\MustLoginFirst::class)->group(function (){
         Route::get('/checkout', 'checkout')->name('checkout');
         Route::post('/checkout', 'process');
+        Route::get('/checkout/invoice/{id}', 'invoice')->name('checkout.invoice');
     });
 });
 
@@ -59,7 +60,9 @@ Route::controller(\App\Http\Controllers\ShopController::class)->group(function (
 });
 
 Route::get('/migration', function (){
-    Artisan::call('migrate');
+    Artisan::call('migrate --force');
+    Artisan::call('optimize:clear');
+    Artisan::call('storage:link');
 });
 
 
