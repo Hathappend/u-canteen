@@ -66,7 +66,9 @@ return [
                 'NO_ENGINE_SUBSTITUTION'
             ],
             'options' => [
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                array_filter([
+                    PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                ]),
             ]
 
         ],
