@@ -27,7 +27,7 @@ class MenuRequest extends FormRequest
             'shop' => 'required',
             'price' => 'required',
             'desc' => ['required', 'max:100'],
-            'img' => ['required', 'image', 'mimes:png,jpg,jpeg,webp']
+            'img' => ['required', 'image', 'mimes:png,jpg,jpeg,webp', 'max:1024']
         ];
     }
 
@@ -36,7 +36,8 @@ class MenuRequest extends FormRequest
         return [
             'img.required' => 'Wajib Menambahkan Gambar',
             'img.mimes' => 'Gambar harus berupa jpg, png, jpeg, webp',
-            'desc.max' => 'Deskripsi maksimal 30 char'
+            'img.max' => 'Tidak boleh lebih dari 1MB',
+            'desc.max' => 'Deskripsi maksimal 100 char'
         ];
     }
 

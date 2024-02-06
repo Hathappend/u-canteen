@@ -22,7 +22,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Nama Menu</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="exampleFormControlInput1" placeholder="Mencintai">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="exampleFormControlInput1" value="{{ old('name') }}" placeholder="Mencintai">
 
                     @error('name')
                     <span class="text-danger p-2 ">
@@ -37,7 +37,7 @@
                     <select class="form-control @error('category') is-invalid @enderror" name="category" id="formFile">
                         <option>CHOOSE ONE: </option>
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{ $category->categoryName }}</option>
+                            <option value="{{$category->id}}" {{ old('category') == $category->id ? 'selected' : ''}}>{{ $category->categoryName }}</option>
                         @endforeach
                     </select>
 
@@ -54,7 +54,7 @@
                     <select class="form-control @error('shop') is-invalid @enderror" name="shop" id="formFile">
                         <option>CHOOSE ONE: </option>
                         @foreach($shops as $shop)
-                            <option value="{{$shop->id}}">{{ $shop->name }}</option>
+                            <option value="{{$shop->id}}" {{ old('shop') == $shop->id ? 'selected' : ''}}>{{ $shop->name }}</option>
                         @endforeach
                     </select>
 
@@ -68,7 +68,7 @@
 
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Harga</label>
-                    <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="exampleFormControlInput1" placeholder="Mencintai">
+                    <input type="text" class="form-control @error('price') is-invalid @enderror" value="{{ old('price')}}" name="price" id="exampleFormControlInput1" placeholder="Mencintai">
 
                     @error('price')
                     <span class="text-danger p-2 ">
@@ -80,7 +80,7 @@
 
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Deskripsi</label>
-                    <textarea class="form-control @error('price') is-invalid @enderror" placeholder="..." name="desc" id="exampleFormControlInput1" style="height: 100px"></textarea>
+                    <textarea class="form-control @error('price') is-invalid @enderror" placeholder="..." name="desc" id="exampleFormControlInput1" style="height: 100px">{{ old('desc')}}</textarea>
 
                     @error('desc')
                     <span class="text-danger p-2 ">
