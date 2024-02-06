@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->uuid('id')->nullable(false)->primary();
             $table->string('menuName')->nullable(false);
-            $table->char('category_id',36)->nullable(false);
+            $table->uuid('category_id',36)->nullable(false);
             $table->integer('price')->nullable(false);
             $table->string('desc', 30)->nullable(false);
             $table->string('img')->nullable(false);

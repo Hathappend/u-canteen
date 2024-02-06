@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('checkouts', function (Blueprint $table) {
             $table->uuid('id')->nullable(false)->primary();
             $table->string('invoice', 14)->nullable(false);
-            $table->char('menu_id', 36)->nullable(false);
-            $table->char('user_id', 36)->nullable(false);
+            $table->uuid('menu_id', 36)->nullable(false);
+            $table->uuid('user_id', 36)->nullable(false);
             $table->string('billing_method', 10)->nullable(false);
             $table->time('pickup_time')->nullable(false);
             $table->timestamps();

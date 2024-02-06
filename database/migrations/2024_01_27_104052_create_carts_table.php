@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->uuid('id')->nullable(false)->primary();
             $table->integer('quantity')->nullable(false);
-            $table->char('menu_id', 36)->nullable(false);
+            $table->uuid('menu_id', 36)->nullable(false);
 
             $table->foreign('menu_id')->on('menus')->references('id');
             $table->timestamps();
