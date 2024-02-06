@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->char('user_id', 36)->nullable(false);
+            $table->uuid('user_id', 36)->nullable(false);
             $table->foreign('user_id')->on('users')->references('id');
         });
     }

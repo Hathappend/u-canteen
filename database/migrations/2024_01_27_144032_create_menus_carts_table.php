@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('menus_carts', function (Blueprint $table) {
-            $table->char('menu_id', 36)->nullable(false);
-            $table->char('cart_id', 36)->nullable(false);
+            $table->uuid('menu_id', 36)->nullable(false);
+            $table->uuid('cart_id', 36)->nullable(false);
             $table->primary(['menu_id', 'cart_id']);
             $table->foreign('menu_id')->on('menus')->references('id');
             $table->foreign('cart_id')->on('carts')->references('id');

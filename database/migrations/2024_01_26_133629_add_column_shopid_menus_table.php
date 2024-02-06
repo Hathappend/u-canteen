@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('menus', function (Blueprint $table){
-            $table->char('shop_id', 36)->nullable(false)->unique();
+            $table->uuid('shop_id', 36)->nullable(false)->unique();
             $table->foreign('shop_id')->on('shops')->references('id');
         });
     }
