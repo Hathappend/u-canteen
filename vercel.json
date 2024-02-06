@@ -40,5 +40,19 @@
         "SSR_TEMP_PATH": "/tmp/ssr",
         "NODE_PATH": "node"
     },
-    "outputDirectory": "public"
+    "outputDirectory": "public",
+    "builds": [
+        {
+            "use": "@vercel/node",
+            "config": {
+                "postBuild": {
+                    "commands": [
+                        "php artisan migrate --force",
+                        "php artisan optimize:clear",
+                        "php artisan storage:link"
+                    ]
+                }
+            }
+        }
+    ]
 }
