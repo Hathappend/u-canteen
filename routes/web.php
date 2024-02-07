@@ -48,6 +48,8 @@ Route::controller(\App\Http\Controllers\CheckoutController::class)->group(functi
         Route::get('/checkout', 'checkout')->name('checkout');
         Route::post('/checkout', 'process');
         Route::get('/checkout/invoice/{id}', 'invoice')->name('checkout.invoice');
+        Route::post('/invoice/{id}/download', 'invoiceDownload');
+
     });
 });
 
@@ -57,12 +59,6 @@ Route::controller(\App\Http\Controllers\ShopController::class)->group(function (
         Route::post('/shop-add', 'shopAddPost');
         Route::post('/{shopName}/menu', 'shop');
     });
-});
-
-Route::get('/migration', function (){
-    Artisan::call('migrate --force');
-    Artisan::call('optimize:clear');
-    Artisan::call('storage:link');
 });
 
 

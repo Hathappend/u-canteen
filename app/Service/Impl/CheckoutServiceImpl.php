@@ -67,6 +67,29 @@ class CheckoutServiceImpl implements CheckoutService
         }
 
         return $result;
+    }
+
+    public function getInvoice(string $invoiceId): array
+    {
+        $findUser = User::query()->where('username', '=', Session::get('username'))->first();
+        $invoiceData = DB::table('checkouts')
+            ->join('menus', 'checkouts.menu_id', '=', 'menus.id')
+            ->select('menus.id',
+                'menus.menuName',
+                'menus.price',
+                'checkouts.billing_method',
+                'checkouts.invoice',
+                'checkouts.pickup_time',
+                'checkouts.quantity',
+                'checkouts.created_at'
+            )
+            ->where('invoice', '=', $invoiceId)
+            ->get();
+
+        return [
+            'user' => $findUser,
+            'invoice' => $invoiceData
+        ];
 
     }
 
