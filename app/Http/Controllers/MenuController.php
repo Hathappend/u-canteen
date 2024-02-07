@@ -74,7 +74,6 @@ class MenuController extends Controller
     public function menuAddPost(MenuRequest $request): RedirectResponse
     {
         try {
-
             $validate = $request->validated();
 
             //auto add ID
@@ -86,9 +85,13 @@ class MenuController extends Controller
 
             $file->storeAs('/img/shops/menus', $validate['img'] , 'public');
 
-            $this->menuService->save($validate);
+            $result = $this->menuService->save($validate);
+            if ($result) {
+                return redirect('/menu-add')
+                    ->with('success', 'Data menu berhasil di tambahkan');
+            }
             return redirect('/menu-add')
-                ->with('success', 'Data menu berhasil di tambahkan');
+                ->with('error', 'Data duplikat, telah ditambahkan sebelumnya');
 
         } catch (ValidationException $exception) {
             return redirect('/menu-add');

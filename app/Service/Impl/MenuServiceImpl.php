@@ -2,6 +2,7 @@
 
 namespace App\Service\Impl;
 
+use App\Models\Category;
 use App\Models\Menu;
 use App\Service\MenuService;
 
@@ -10,6 +11,16 @@ class MenuServiceImpl implements  MenuService
 
     public function save(array $menuData): bool
     {
+        $findMenu = Menu::query()
+            ->where('menuName', '=', $menuData['name'])
+            ->where('shop_id', '=', $menuData['shop'])
+            ->first();
+
+
+        if ($findMenu != null) {
+            return false;
+        }
+
         $menu = new Menu();
         $menu->id = $menuData['id'];
         $menu->menuName = $menuData['name'];

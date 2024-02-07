@@ -18,6 +18,16 @@
                 </div>
             @endif
 
+                @if(session()->has('error'))
+                    <div class="row mx-auto" style="width:98%">
+                        <div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" role="alert">
+                            <div>
+                                {{ session()->get("error") }}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
             <form action="/menu-add" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">

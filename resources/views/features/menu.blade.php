@@ -37,7 +37,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $menu->menuName }}</h5>
+                                    <h5 class="card-title">{{ ucwords($menu->menuName) }}</h5>
                                     <hr>
                                     <h5 class="card-title">Rp. {{ number_format($menu->price) }},-</h5>
                                     <p class="card-desc pt-2">{{ $menu->menu_desc }}</p>

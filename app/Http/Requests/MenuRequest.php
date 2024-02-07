@@ -44,7 +44,7 @@ class MenuRequest extends FormRequest
     protected function prepareForValidation(): array
     {
         return [
-            'name' => trim($this->name),
+            'name' => strtolower(trim($this->name)),
             'price' => trim($this->price),
             'desc' => trim($this->desc),
         ];
