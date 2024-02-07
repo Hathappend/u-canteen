@@ -51,9 +51,9 @@
                         </small>
 
                         <div class="forgot-password text-end mb-3">
-                            <span>
-                                <a class="text-white" href="/forgot">Lupa password?</a>
-                            </span>
+{{--                            <span>--}}
+{{--                                <a class="text-white" href="/forgot">Lupa password?</a>--}}
+{{--                            </span>--}}
                         </div>
 
                         <button type="submit" class="btn btn-outline-light w-100">
