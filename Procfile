@@ -1,1 +1,1 @@
-web: bin/httpd -f /workspace/public/ -p $PORT
+web: /workspace/vendor/bin/heroku-php-apache2 public/
