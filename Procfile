@@ -1,2 +1,1 @@
-composer: /layers/paketo-buildpacks_php/composer/vendor/bin/composer install
-web: /workspace/vendor/bin/heroku-php-apache2 public/ && php artisan migrate --force && php artisan optimize:clear && php artisan storage:link
+composer: /layers/paketo-buildpacks_php-dist/php/bin/php /layers/paketo-buildpacks_php-composer/composer/composer.phar install
