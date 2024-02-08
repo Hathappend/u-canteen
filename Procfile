@@ -1,1 +1,1 @@
-web: /layers/paketo-buildpacks_php-dist/php/bin/php -S 0.0.0.0:$PORT -t public/
+web: bash -c "composer install && php -S 0.0.0.0:${PORT:-8080} -t /workspace/public"
