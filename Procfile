@@ -1,1 +1,1 @@
-composer: /layers/paketo-buildpacks_php-dist/php/bin/php /layers/paketo-buildpacks_php-composer/composer/composer.phar install
+web: /layers/paketo-buildpacks_php-dist/php/bin/php -S 0.0.0.0:$PORT -t public/
