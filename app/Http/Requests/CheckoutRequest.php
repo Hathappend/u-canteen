@@ -23,26 +23,36 @@ class CheckoutRequest extends FormRequest
     public function rules(): array
     {
         $now = Carbon::now()->format('H:i');
-        $close = '16:00';
+        $close = env('CLOSED', '');
 
-        return [
-            'billing_method' => ['required', 'not_in:null'],
+        $rules = [
+            'billing_method' => ['required'],
             'pickup_time' => [
                 'required',
                 'after:' . $now,
-                'before:' . $close
             ]
         ];
+
+        if ($close != null) {
+            $rules['pickup_time'][] = 'before:' . $close;
+        }
+
+        return $rules;
     }
 
     public function messages(): array
     {
-        return [
-            'billing_method.not_in' => 'Perlu memilih metode pembayaran',
+        $messages =  [
+            'billing_method.required' => 'Perlu memilih metode pembayaran',
             'pickup_time.required' => 'Perlu mengisi jam pengambilan',
-            'pickup_time.after' => 'Format waktu tidak valid',
-            'pickup_time.before' => 'Format waktu lebih dari jam tutup kantin'
+            'pickup_time.after' => 'Tidak boleh kurang dari waktu saat ini',
         ];
+
+        if (env('CLOSED', '') != null) {
+            $messages['pickup_time.before'] = 'Format waktu lebih dari jam tutup kantin';
+        }
+
+        return $messages;
     }
 
     protected function prepareForValidation(): void
